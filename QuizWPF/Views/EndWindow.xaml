@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="QuizWPF.Views.EndWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:QuizWPF.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800">
+    <Grid Background="#FF6E0202">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="91*"/>
+            <RowDefinition Height="209*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Twój wynik:" Margin="292,50,291,57" HorizontalAlignment="Center" RenderTransformOrigin="-0.012,0.628" FontSize="36" FontFamily="Comic Sans MS" FontWeight="Bold" Foreground="#FF00FF8B" Width="217" />
+        <Label Content="{Binding PointsShow}" HorizontalAlignment="Center" FontSize="36" FontFamily="Comic Sans MS" FontWeight="Bold" Background="{x:Null}" Foreground="#FF00FF8B" Margin="366,111,368,10" Width="66"/>
+        <Button Command="{Binding ExecuteCommand}" HorizontalAlignment="Right" Margin="0,10,10,0" Width="50" Background="#FF08AFC9" Height="50" VerticalAlignment="Top">
+            <StackPanel>
+                <Image Source="/QuizWPF;component/icons/forwardArrow.png" />
+            </StackPanel>
+        </Button>
+        <ListView ItemsSource="{Binding ListViewStats, Mode=OneWay}" Margin="25,10" Grid.Row="1" HorizontalAlignment="Center" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" FocusVisualStyle="{x:Null}" Foreground="#FFB0B0B0" FontFamily="Comic Sans MS" FontSize="36" Width="750">
+            <ListView.Resources>
+                <Style TargetType="GridViewColumnHeader">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </Style>
+            </ListView.Resources>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding is_Selected}" Value="True">
+                            <Setter Property="Foreground" Value="#FFF3FF00"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="100" Header="POS" DisplayMemberBinding="{Binding id}"/>
+                    <GridViewColumn Width="450" Header="NAME" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Width="150" Header="POINTS" DisplayMemberBinding="{Binding points}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>
